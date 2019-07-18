@@ -17,10 +17,20 @@
   </div>
 </template>
 <script>
+
+  const getNumbers = () => {
+    const candidates = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    const array = []
+    for (let i = 0; i < 4; i += 1) {
+      const chosen = candidates.splice(Math.floor(Math.random() * ( 9 - i )), 1)[0]
+      array.push(chosen)
+    }
+    return array
+  }
   export default {
     data () {
       return {
-        answer: this.getNumbers(), //ex) [1, 5, 3, 4]
+        answer: getNumbers(), //ex) [1, 5, 3, 4]
         tries: [],
         value: '',
         result: ''
@@ -34,7 +44,7 @@
             result: '홈런'
           })
           this.result = '홈런'
-          alert('게임을 다시 실행합니다.')
+          alert('축하합니다. 정답입니다. 게임을 다시 실행합니다.')
           this.value = ''
           this.answer = this.getNumbers
           this.tries = []
@@ -43,7 +53,7 @@
           //정답이 틀렸으면
           if (this.tries.length >= 9) { //10번째 시도
             this.result = `10번 넘게 틀려서 실패! 답은 ${ this.answer.join(',') } 였습니다.`
-            alert('게임을 다시 시작합니다.')
+            alert('아쉽네요. 틀렸습니다. 게임을 다시 시작합니다.')
             this.value = ''
             this.answer = this.getNumbers
             this.tries = []
@@ -66,20 +76,6 @@
           this.value = ''
           this.$refs.answer.focus()
         }
-
-        this.value = ''
-        this.$refs.answer.focus()
-      }
-    },
-    computed: {
-      getNumbers () {
-        const candidates = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-        const array = []
-        for (let i = 0; i < 4; i += 1) {
-          const chosen = candidates.splice(Math.floor(Math.random() * ( 9 - i )), 1)[0]
-          array.push(chosen)
-        }
-        return array
       }
     }
   }
