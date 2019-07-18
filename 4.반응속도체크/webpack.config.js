@@ -18,6 +18,12 @@ module.exports = {
     rules: [{
       test: /\.vue$/,
       loader: 'vue-loader' // use 라고 써도 된다.
+    }, {
+      test: /\.css$/,
+      use: [
+        'vue-style-loader',
+        'css-loader'
+      ]
     }]
   },
   plugins: [
@@ -27,6 +33,7 @@ module.exports = {
     // 하나로 합쳐진 파일의 이름
     filename: '[name].js',
     // 하나로 합쳐진 파일이 생성될 위치
-    path: path.join(__dirname, 'dist')
+    path: path.join(__dirname, 'dist'),
+    publicPath: '/dist' //웹팩 데브 쓸때
   }
 }
